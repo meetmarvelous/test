@@ -1,0 +1,221 @@
+{
+  "info": {
+    "_postman_id": "1d6ee3c1-4826-4174-a8c0-e82bca3bbea1",
+    "name": "Circuit",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55444209",
+    "_collection_link": "https://go.postman.co/collection/55444209-1d6ee3c1-4826-4174-a8c0-e82bca3bbea1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Confirm Legacy Disable",
+      "item": [
+        {
+          "name": "Wallet Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"userId\":\"test@example.com\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend-api}}/wallet/create",
+              "host": [
+                "{{backend-api}}"
+              ],
+              "path": [
+                "wallet",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Backend Up & Running",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{backend}}/",
+          "host": [
+            "{{backend}}"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check Backend Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{backend}}/health",
+          "host": [
+            "{{backend}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Session Challenge Confirmation",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"walletAddress\": \"5J4rFUXsiaCMrpVYjCrYh8nnKgxaZMxUfE7KcUKB7prS\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{backend-api}}/auth/challenge",
+          "host": [
+            "{{backend-api}}"
+          ],
+          "path": [
+            "auth",
+            "challenge"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Session Verify",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "// {\r\n//   \"challengeId\": \"1faf7f69-4571-48f2-a7a6-0c06b6b71a6f\",\r\n//   \"signature\": \"5mmPK98migSS1y6SQMkf9NXnUmTJKxR7BTTiS3fNicNdzxWohqFbWzLWESvXVmgdRSUfRjxrwJe9JHFtSYRWuGpR\"\r\n// }\r\n\r\n{\r\n  \"walletAddress\": \"FR3RdaPA7xEMPmR8bfhRzFMcgfcy7rS6xc9iurZ1vV3F\",\r\n  \"nonce\": \"9749e1eb792997846f2028af0c67cc86ca875bf34b1ee000704b2f5de4141ac8\",\r\n  \"signature\": \"q3skCbTfsYBHHkdk1hB9arCPLY8ZQG5KnzcW49gs3rPkta2Y9yiHH3FkTt3PTye642km65Bd3DyGmzbKPtKinDR\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{backend-api}}/auth/verify",
+          "host": [
+            "{{backend-api}}"
+          ],
+          "path": [
+            "auth",
+            "verify"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get \"me\"",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJ0b2tlblZlcnNpb24iOjIsIndhbGxldEFkZHJlc3MiOiJGUjNSZGFQQTd4RU1QbVI4YmZoUnpGTWNnZmN5N3JTNnhjOWl1cloxdlYzRiIsImlhdCI6MTc5MDY1NDU0MiwiZXhwIjoxNzkwNjU4MTQyLCJhdWQiOiJjaXJjdWl0LWFwaSIsImlzcyI6ImNpcmN1aXQtYXV0aCIsInN1YiI6ImVlOWEyZmIxLWExNzUtNGZkNS1hOWZkLWJjMTAwYmM2MjdlMyIsImp0aSI6IjMyMWMxNGU5LTA0ZTAtNDcxMi04NjIwLTc1OTVlMTM2NmYzNiJ9.hBmFYbNq5uVgG3nISwHiTbSmXQRcgW1PWuWfRyO-xAY",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{backend-api}}/auth/me",
+          "host": [
+            "{{backend-api}}"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Verify Email",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJ0b2tlblZlcnNpb24iOjIsIndhbGxldEFkZHJlc3MiOiJGUjNSZGFQQTd4RU1QbVI4YmZoUnpGTWNnZmN5N3JTNnhjOWl1cloxdlYzRiIsImlhdCI6MTc5MDY1NDU0MiwiZXhwIjoxNzkwNjU4MTQyLCJhdWQiOiJjaXJjdWl0LWFwaSIsImlzcyI6ImNpcmN1aXQtYXV0aCIsInN1YiI6ImVlOWEyZmIxLWExNzUtNGZkNS1hOWZkLWJjMTAwYmM2MjdlMyIsImp0aSI6IjMyMWMxNGU5LTA0ZTAtNDcxMi04NjIwLTc1OTVlMTM2NmYzNiJ9.hBmFYbNq5uVgG3nISwHiTbSmXQRcgW1PWuWfRyO-xAY",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"olamideoluwalusi@gmail.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{backend-api}}/user/email",
+          "host": [
+            "{{backend-api}}"
+          ],
+          "path": [
+            "user",
+            "email"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
