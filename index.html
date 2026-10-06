@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ace Innovation Nexus Academy 3.0 - Application Form</title>
+  
+  <style>
+    /* CSS Variables & Theme Setup */
+    :root {
+      --bg-main: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --input-bg: #151d2f;
+      --input-border: #28354f;
+      --input-focus: #6366f1;
+      --input-focus-glow: rgba(99, 102, 241, 0.25);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-label: #cbd5e1;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --danger: #f43f5e;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.25rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background Effects */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(140px);
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    body::before {
+      top: -100px;
+      left: -100px;
+      background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    }
+
+    body::after {
+      bottom: -100px;
+      right: -100px;
+      background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+    }
+
+    /* Layout Container */
+    .container {
+      width: 100%;
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header Section */
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 0.85rem;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    .title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #ffffff 40%, #c7d2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #818cf8;
+      margin-bottom: 0.6rem;
+    }
+
+    .description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Card Wrapper */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 1.6rem 1.25rem;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .title {
+        font-size: 1.7rem;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-label);
+      margin-bottom: 0.45rem;
+    }
+
+    .required {
+      color: var(--danger);
+      margin-left: 0.15rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--text-main);
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #4b5563;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--input-focus);
+      background: #182238;
+      box-shadow: 0 0 0 3px var(--input-focus-glow);
+    }
+
+    /* Custom Select Arrow */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%2394a3b8" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 0.85rem center;
+      background-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #111827;
+      color: #f8fafc;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 95px;
+      line-height: 1.5;
+    }
+
+    .char-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.45rem;
+    }
+
+    .char-counter {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Radio Cards Grid */
+    .radio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+    }
+
+    @media (max-width: 520px) {
+      .radio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .radio-card {
+      position: relative;
+      background: rgba(21, 29, 47, 0.6);
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .radio-card input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .radio-card:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      background: rgba(30, 41, 59, 0.7);
+    }
+
+    .radio-card:has(input:checked) {
+      border-color: var(--input-focus);
+      background: rgba(79, 70, 229, 0.12);
+      box-shadow: 0 0 0 1px var(--input-focus);
+    }
+
+    .radio-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .radio-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Checkbox Group */
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      margin: 1.6rem 0 1.2rem 0;
+      cursor: pointer;
+    }
+
+    .checkbox-container input {
+      margin-top: 0.2rem;
+      width: 17px;
+      height: 17px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Action Button */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, #3730a3 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 0.95rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    /* Success Card Overlay */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .success-overlay.active {
+      display: flex;
+    }
+
+    .success-card {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem 2rem;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .success-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 1.25rem auto;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-emerald);
+      font-size: 1.6rem;
+    }
+
+    .success-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #ffffff;
+    }
+
+    .success-message {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.6rem;
+    }
+
+    .btn-close {
+      width: 100%;
+      padding: 0.75rem;
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-close:hover {
+      background: #334155;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 1.75rem;
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Top Header -->
+    <header class="header">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Cohort 3.0 Registration
+      </div>
+      <h1 class="title">Ace Innovation Nexus</h1>
+      <h2 class="subtitle">Academy 3.0 Program</h2>
+      <p class="description">
+        Join an intensive engineering and design immersion built to empower ambitious builders for global tech teams.
+      </p>
+    </header>
+
+    <!-- Main Registration Card -->
+    <main class="card">
+      <form id="nexusApplicationForm" novalidate>
+        
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName">Full Name <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="fullName" 
+            name="fullName" 
+            placeholder="e.g. Chisom Adebayo" 
+            required
+            autocomplete="name"
+          >
+        </div>
+
+        <!-- Email & WhatsApp -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="alex@example.com" 
+              required
+              autocomplete="email"
+            >
+          </div>
+          <div class="form-group">
+            <label for="phone">WhatsApp / Phone <span class="required">*</span></label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              placeholder="+234 801 234 5678" 
+              required
+              autocomplete="tel"
+            >
+          </div>
+        </div>
+
+        <!-- Learning Track & Commitment -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="track">Preferred Track <span class="required">*</span></label>
+            <select id="track" name="track" required>
+              <option value="" disabled selected>Select a program track</option>
+              <option value="Full-Stack Web Development">Full-Stack Web Development</option>
+              <option value="Frontend Development (React/Next.js)">Frontend (React / Next.js)</option>
+              <option value="Backend Engineering (Node & Python APIs)">Backend Engineering (Node & Python)</option>
+              <option value="Data Science & Machine Learning">Data Science & AI / ML</option>
+              <option value="UI/UX Product Design">UI/UX Product Design</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="availability">Availability / Schedule <span class="required">*</span></label>
+            <select id="availability" name="availability" required>
+              <option value="" disabled selected>Select learning mode</option>
+              <option value="Full-Time (Weekday Immersive)">Full-Time (Weekday Immersive)</option>
+              <option value="Part-Time (Evenings & Weekends)">Part-Time (Evenings & Weekends)</option>
+              <option value="Self-Paced with Mentor Reviews">Self-Paced with Mentor Reviews</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Prior Experience Level -->
+        <div class="form-group">
+          <label>Experience Level in Selected Track <span class="required">*</span></label>
+          <div class="radio-grid">
+            
+            <label class="radio-card">
+              <input type="radio" name="experience" value="Beginner" required>
+              <span class="radio-title">Beginner</span>
+              <span class="radio-desc">Fresh start, zero or minimal prior code</span>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="experience" value="Intermediate">
+              <span class="radio-title">Intermediate</span>
+              <span class="radio-desc">Built basic mini-apps or design briefs</span>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="experience" value="Advanced">
+              <span class="radio-title">Advanced</span>
+              <span class="radio-desc">Polishing skills for industry roles</span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Statement / Motivation -->
+        <div class="form-group">
+          <div class="char-meta">
+            <label for="motivation">Why do you want to join Academy 3.0? <span class="required">*</span></label>
+            <span id="charCount" class="char-counter">0 / 400</span>
+          </div>
+          <textarea 
+            id="motivation" 
+            name="motivation" 
+            maxlength="400" 
+            placeholder="Share your goals, what project you would love to build, and what drives you to join Nexus Academy 3.0..."
+            required
+          ></textarea>
+        </div>
+
+        <!-- Agreement -->
+        <label class="checkbox-container">
+          <input type="checkbox" id="commitment" name="commitment" required>
+          <span class="checkbox-label">
+            I pledge to attend weekly sessions, submit milestone capstones, and adhere to the Ace Innovation Nexus Academy 3.0 code of conduct.
+          </span>
+        </label>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span>Complete Application</span>
+          <span>&rarr;</span>
+        </button>
+
+      </form>
+    </main>
+
+    <footer class="footer">
+      &copy; 2026 Ace Innovation Nexus. All rights reserved. Plain HTML5 & CSS3.
+    </footer>
+
+  </div>
+
+  <!-- Confirmation Feedback Modal -->
+  <div class="success-overlay" id="successModal">
+    <div class="success-card">
+      <div class="success-icon">&#10003;</div>
+      <h3 class="success-title">Application Submitted!</h3>
+      <p class="success-message" id="successMsg">
+        Your application for Ace Innovation Nexus Academy 3.0 has been received. Our admissions team will review your application and reach out shortly.
+      </p>
+      <button type="button" class="btn-close" id="closeModal">Dismiss</button>
+    </div>
+  </div>
+
+  <!-- Vanilla JavaScript -->
+  <script>
+    const form = document.getElementById('nexusApplicationForm');
+    const motivationInput = document.getElementById('motivation');
+    const charCount = document.getElementById('charCount');
+    const successModal = document.getElementById('successModal');
+    const successMsg = document.getElementById('successMsg');
+    const closeModal = document.getElementById('closeModal');
+
+    // Real-time character counter for textarea
+    motivationInput.addEventListener('input', () => {
+      charCount.textContent = `${motivationInput.value.length} / 400`;
+    });
+
+    // Form submission handling
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const applicantName = document.getElementById('fullName').value.trim();
+      const track = document.getElementById('track').value;
+
+      successMsg.textContent = `Thank you, ${applicantName}! Your application for the ${track} track at Ace Innovation Nexus Academy 3.0 has been successfully received. Check your email and WhatsApp for onboarding instructions.`;
+
+      successModal.classList.add('active');
+      form.reset();
+      charCount.textContent = '0 / 400';
+    });
+
+    // Close confirmation dialog
+    closeModal.addEventListener('click', () => {
+      successModal.classList.remove('active');
+    });
+
+    successModal.addEventListener('click', (e) => {
+      if (e.target === successModal) {
+        successModal.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
